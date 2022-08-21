@@ -35,7 +35,7 @@ export const AddPost = () => {
           setTitle(data.title);
           setText(data.text);
           setImage(data.imageUrl);
-          setTags(data.tags);
+          setTags(data.tags.join(', '));
         })
         .catch((err) => {
           console.warn(err);
