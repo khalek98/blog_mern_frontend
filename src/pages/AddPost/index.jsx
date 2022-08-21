@@ -52,12 +52,14 @@ export const AddPost = () => {
       const {
         data: { url },
       } = await axios.post('/upload', formData);
-      setImage(Boolean(process.env.REACT_APP_API_URL) ? url.slice(1, url.length) : url);
+      setImage(url.slice(1, url.length));
     } catch (error) {
       console.log(error);
       alert('Failed upload file...');
     }
   };
+
+  console.log(imageUrl);
 
   const onClickRemoveImage = () => {
     if (window.confirm('Are you sure you want to remove img?')) {
