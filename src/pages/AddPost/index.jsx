@@ -49,8 +49,10 @@ export const AddPost = () => {
       const formData = new FormData();
       const file = e.target.files[0];
       formData.append('image', file);
-      const { data } = await axios.post('/upload', formData);
-      setImage(data.url);
+      const {
+        data: { url },
+      } = await axios.post('/upload', formData);
+      setImage(Boolean(process.env.REACT_APP_API_URL) ? url.slice(1, url.length) : url);
     } catch (error) {
       console.log(error);
       alert('Failed upload file...');
@@ -127,7 +129,7 @@ export const AddPost = () => {
           </Button>
           <img
             className={styles.image}
-            src={`${process.env.REACT_APP_API_URL}${imageUrl}`}
+            src={`${process.env.REACT_APP_API_URL || 'http://localhost:4444'}${imageUrl}`}
             alt="Uploaded"
           />
         </>
